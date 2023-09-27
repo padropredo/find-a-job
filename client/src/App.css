@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-roboto: "Roboto Slab", serif;
+  --font-raleway: "Raleway", sans-serif;
+}
+
+body {
+  font-family: var(--font-roboto);
+}
+
+.hr.solid{
+  border-top: 3px solid #bbb;
+}
+
+.buttons{
+  margin: 0.5rem;
+}
+
+.joboffer {
+  width: 200px;
+  height: 120px;
+  margin: 0.5rem;
+
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1;
+  border-color: gray;
+
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+}
+.joboffer:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+.openOffer {
+  color: green;
+}
+
+
+.pausedOffer {
+  color: red;
+}
+
+
+.list{
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.app {
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.empty {
+  margin: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+  letter-spacing: 0.9px;
+  background: green;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .app {
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .app {
+    padding: 1rem 0.25rem;
+  }
+
+  h1 {
+    font-size: 0.5rem;
+  }
+
+  .list {
+    margin-top: 0.5rem;
+  }
+
+  .joboffer {
+    width: "100%";
+    margin: 0.25rem;
+  }
+}

@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Porta do host : Porta do contêiner
+    environment:
+      - REACT_APP_API_URL=http://host.docker.internal:8080
