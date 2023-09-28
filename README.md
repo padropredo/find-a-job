@@ -1,6 +1,6 @@
 # Find a Job
 
-Este repositório tem como objetivo implementar uma aplicação web para o teste prático de um processo seletivo.
+Este repositório tem como objetivo implementar uma aplicação web para o teste prático do processo seletivo para o cargo de desenvolvedor de uma empresa.
 
 A aplicação web consiste numa plataforma capaz de inscrever candidatos em oportunidades de emprego.
 
@@ -8,25 +8,23 @@ A aplicação web consiste numa plataforma capaz de inscrever candidatos em opor
 
 Para executar a aplicação é preciso ter o docker instalado em sua máquina.
 
-Como instalar o Docker ?
+Com o Docker já instalado, clone o projeto ou faça download do mesmo em sua máquina.
 
-Após concluir a instalação do Docker navegue atá a pasta do projeto em sua máquina.
+Abra um terminal na pasta raiz de onde se encontra o projeto localmente.
 
-Abra um terminal na pasta raiz e execute o seguinte comando:
+Digite o seguinte comando no terminal e aperte enter:
 
-    docker-compose up
+    docker-compose up --build
 
-Depois que os 3 containers estiverem em execução, é possível verificar isso tanto pelo terminal quanto pela aplicação Docker Desktop.
+Depois que os 3 containers estiverem em execução, abra seu navegador e acesse o endereço http://localhost:3000 .
 
-Abra seu navegador e acesse o endereço http://localhost:3000
-
-E a seguinte tela deve ser carregada:
-
-Pronto! A aplicação está sendo executada!
+Pronto! A aplicação está sendo executada e já pode ser utilizada!
 
 # Implementação do projeto
 
-A implementação dessa aplicação foi dividida no desenvolvimento de 3 partes: Banco de dados, API RESTful e Interface Gráfica. 
+A implementação dessa aplicação foi dividida no desenvolvimento de 3 partes que serão detalhadas ao longo desse documento: [Banco de dados](#banco-de-dados), [API RESTful](#api-restful) e [Interface Gráfica](#interface-gráfica)
+
+Além disso foi escrita nesse documento uma sessão de [Aprimoramentos](#aprimoramentos) para melhor funcionamento da aplicação.
 
 ## Banco de dados 
 
@@ -113,21 +111,16 @@ Sendo assim essa tabela possibilita a relação **many-to-many** entre a tabela 
 
 ## API RESTful
 
-A criação da API RESTful atua como um intermediário fundamental entre o banco de dados e a interface de usuário dessa aplicação. Ela desempenha o papel de uma ponte de comunicação eficiente, permitindo que as solicitações e respostas fluam de maneira organizada e padronizada entre essas duas partes.
+A criação da API RESTful atua como um intermediário que permite a comunicação entre o banco de dados e a interface de usuário dessa aplicação.
 
-A API foi desenvolvida utilizando Node.js como plataforma de execução (runtime) e fazendo uso da biblioteca Express.js, tendo como linguagem de programação TypeScript.
+A API foi desenvolvida utilizando Node.js como plataforma de execução (runtime) e fazendo uso da biblioteca Express.js, tendo como linguagem de programação TypeScript. Para escrever e ler valores no banco de dados foi usado a biblioteca node-postgres.
 
-Foram desenvolvidos os principais endpoints para criação, edição, exclusão e listagem dos elementos das tabelas contidas no banco de dados apresentado.
-
-<style>
-required{
-    color:red;
-}
-</style>
+Foram desenvolvidos os principais endpoints para criação, edição, exclusão e listagem dos elementos das tabelas, contidas no banco de dados, como apresentado na documentação a seguir.
 
 ### Account
 
 <details>
+
 
  <summary><code>POST</code> <code><b>/account</b></code> <code>Cria uma conta</code></summary>
 
@@ -1098,3 +1091,73 @@ Internal Server Error
 </details>
 
 
+## Interface Gráfica
+
+Para essa aplicação foi desenvolvida uma interface de usuário utilizando a framework React.js.
+
+Ela faz uso da API desenvolvida para recuperar e inserir novas informações no banco de dados.
+
+A interface é constituída por 3 páginas principais: [Página de Login](#página-de-login), [Página de Empresa](#página-de-empresa) e [Página de Candidato](#página-de-candidato) .
+
+### Página de Login
+
+A página de login permite ao usuário se conectar à aplicação ou se registrar, criando uma nova conta.
+
+![Pagina de login](img/login-screen.png)
+
+Durante o registro de uma nova conta o usuário escolhe o tipo de conta que está sendo criada (Conta de empresa ou conta de candidato). Se for escolhido uma conta do tipo candidato, automaticamente é gerado um perfil de candidato para aquela conta com o nome atribuído.
+
+![Pagina de login](img/register-screen.png)
+
+Com uma conta já existente é possível se conectar à aplicação. Caso a conta seja do tipo empresa, o usuário será redirecionado à Página de Empresa, caso seja do tipo candidato, será redirecionado à Página de Candidato.
+
+### Página de Empresa
+
+Ao acessar a página da empresa todas as vagas de emprego pertencentes à conta em que foi conectada serão mostradas.
+
+Essas vagas podem ser filtradas pelo tipo da vaga, e pelo estado da vaga ao aplicar os filtros presentes para seleção. Além disso o usuário pode navegar entre págnas dos elementos e escolher o número de elementos por página.
+
+![Página de empresa](img/company-screen.png)
+
+Na página de empresa o candidato pode criar uma nova vaga de emprego clicando no botão "Create new Job Offer".
+
+Ao salvar a vaga de emprego com as informações que foram preenchidas, a vaga será adicionada ao banco de dados e a nova vaga também aparecerá na página.
+
+![Tela de criação de nova vaga](img/create-new-job-offer-screen.png)
+
+
+Ao clicar em uma vaga presente na página, o usuário verá a descrição da vaga, os candidatos que se aplicaram à ela, e também pode remover ou atualizar as informações da vaga.
+
+![Tela de visualização](img/job-offer-company-screen.png)
+
+Por fim o usuário pode se deslogar clicando no botão Logout.
+
+### Página de Candidato
+
+Ao acessar a página de candidato todas as vagas presentes no banco de dados serão mostradas.
+
+Assim como na página de empresa as vagas podem ser filtradas pelo tipo da vaga, e pelo estado da vaga ao aplicar os filtros presentes para seleção e o usuário também pode navegar entre págnas dos elementos e escolher o número de elementos por página.
+
+![Página de candidato](img/candidate-screen.png)
+
+O usuário pode editar o perfil de candidato clicando no botão "Edit Profile".
+
+![Tela de edição de perfil de candidato](img/edit-profile-screen.png)
+
+Ao selecionar uma vaga, o usuário pode ler a descrição da vaga e também se candidatar à vaga. Mas não pode ver os outros candidatos que se candidataram à ela.
+
+![Tela de edição de vaga de emprego](img/job-offer-candidate-screen.png)
+
+Por fim o usuário pode se desconectar da aplicação clicando no botão Logout.
+
+## Aprimoramentos
+
+Existem diversos aprimoramentos que podem ser feito para melhorar a qualidade da aplicação.
+
+O primeiro deles é a implementação de validadores de parâmetros enviados para os endpoints na API, com o intuito de verificar as informações que são passadas para cada rota quando acessadas.
+
+Outra importante melhoria a ser feita é a criação de middlewares na API para verificar a autenticação do usuário e o tipo de conta que está conectada, restringindo o acesso a algumas funcionalidades conforme o login realizado. Por exemplo, se o usuário não estiver autenticado, à API, ele não poderá acessar alguns endpoints. Assim como terá acesso restrito à alguns endpoints dependendo do tipo de sua conta (Conta de empresa ou de candidato). 
+
+Da maneira que essa aplicação foi implementada a informação de sessão da conta que está conectada na interface de usuário, é feita por meio do LocalStorage e seria mais interessante usar outras estratégias mais seguras, como Cookies Seguros ou a biblioteca Redux Persist por exemplo.
+
+Um aprimoramento na própria interface gráfica para deixá-la mais interessante também é bem vinda.

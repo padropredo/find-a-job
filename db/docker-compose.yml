@@ -9,6 +9,6 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=findajob
     volumes:
-      - ./init:/docker-entrypoint-initdb.d/init.sql
+      - ./init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
