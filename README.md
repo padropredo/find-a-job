@@ -128,7 +128,8 @@ required{
 ### Account
 
 <details>
- <summary><code>POST</code> <code><b>/account</b></code> <code>Cria um novo elemento na tabela Account</code> 
+
+ <summary><code>POST</code> <code><b>/account</b></code> <code>Cria uma conta</code></summary>
 
 #### Body Parameters
 <table>
@@ -136,7 +137,7 @@ required{
 <td> Name </td> <td> Data Type </td> <td>Description</td>
 </tr>
 <tr>
-<td> <div>Body</div> <required>required</required></td>
+<td> <div>body</div> <required>required</required></td>
 <td>
 
 
@@ -149,7 +150,7 @@ required{
  ```
 
 <td>
-Data for the account table
+Account data
 </td>
 </td>
 </tr>
@@ -169,12 +170,14 @@ Successful Operation
 
 ```json
 {
-    "id": 0,
-    "email": "",
-	"password": "",
-	"type": 0,
-	"create_date": "",
-	"update_time": ""   
+"id": 0,
+"account_id": 0,
+"type": 0,
+"status": 0,
+"title": "",
+"description": "",
+"create_time": "",
+"update_time": ""
 }
  ```
 </td>
@@ -193,7 +196,58 @@ Internal Server Error
 </details>
 
 <details>
- <summary><code>DELETE</code> <code><b>/account</b></code> <code>Atualiza um elemento na tabela Account</code>
+
+ <summary><code>GET</code> <code><b>/account</b></code> <code>Recupera uma conta</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>email</div> <required>required</required></td><td>int<td>Account email to be selected</td></td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+{
+    "id": 0,
+    "email": "",
+    "password": "",
+    "type": 0,
+    "create_date": "",
+    "update_time": ""
+}
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/account</b></code> <code>Atualiza uma conta</code></summary>
 
 
 #### Query Parameters
@@ -206,7 +260,7 @@ Internal Server Error
 <td>
 [int]
 <td>
-One or more account ids to remove respective elements
+One or more account ids to be removed
 </td>
 </td>
 </tr>
@@ -234,3 +288,813 @@ Internal Server Error
 </tr>
 
 </table>
+
+
+</details>
+
+### JobOffer
+
+
+<details>
+
+ <summary><code>POST</code> <code><b>/joboffer/{accountId}</b></code> <code>Cria uma nova vaga de emprego</code></summary>
+
+#### Path Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>accountId</div> <required>required</required></td>
+<td>
+
+int
+<td>
+Account id that the job offer will be linked
+</td>
+</td>
+</tr>
+</table>
+
+
+#### Body Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>body</div> <required>required</required></td>
+<td>
+
+
+```json
+{
+    "type": 0,
+    "status": 0,
+    "title": "",
+    "description": ""
+}
+ ```
+
+<td>
+Job offer data
+</td>
+</td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+{
+    "id": 0,
+    "account_id": 0,
+    "type": 0,
+    "status": 0,
+    "title": "",
+    "description": "",
+    "create_time": "",
+    "update_time": ""
+}
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>UPDATE</code> <code><b>/joboffer</b></code> <code>Atualiza uma vaga de emprego</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>id</div> <required>required</required></td>
+<td>
+
+int
+<td>
+JobOffer id to update
+</td>
+</td>
+</tr>
+</table>
+
+
+#### Body Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>body</div> <required>required</required></td>
+<td>
+
+
+```json
+{
+    "type": 0,
+    "status": 0,
+    "title": "",
+    "description": ""
+}
+ ```
+
+<td>
+Job offer data to update. It's not necessary to send all the fields in body, just the fields wanted to be updated.
+</td>
+</td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+{
+    "id": 0,
+    "account_id": 0,
+    "type": 0,
+    "status": 0,
+    "title": "",
+    "description": "",
+    "create_time": "",
+    "update_time": ""
+}
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>GET</code> <code><b>/joboffer</b></code> <code>Recupera uma ou várias vagas de emprego</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>page</div> <required>required</required></td><td>int<td>Page offset</td></td>
+</tr>
+<tr>
+<td> <div>size</div> <required>required</required></td><td>int<td>Limit of items to be selected</td></td>
+</tr>
+<tr>
+<td> <div>id</div> <required>optional</required></td><td>[int]<td>One or multiple job offer ids to be listed </td></td>
+<tr>
+<tr>
+<td> <div>accountId</div> <required>optional</required></td><td>[int]<td>One or multiple account ids to filter job offers by account id </td></td>
+<tr>
+<td> <div>type</div> <required>optional</required></td><td>[int]<td>one or multiple type numbers to filter job offers by types </td></td>
+</tr>
+<tr>
+<td> <div>status</div> <required>optional</required></td><td>[int]<td>one or multiple status numbers to filter job offers by status </td></td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+[
+    {
+        "id": 0,
+        "account_id": 0,
+        "type": 0,
+        "status": 0,
+        "title": "",
+        "description": "",
+        "create_time": "",
+        "update_time": ""
+    }
+]
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>DELETE</code> <code><b>/joboffer</b></code> <code>Remove uma ou várias vagas de emprego</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<td> <div>id</div> <required>optional</required></td><td>[int]<td>One or multiple job offer ids to be removed </td></td>
+<tr>
+
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+### CandidateProfile
+
+
+<details>
+
+ <summary><code>POST</code> <code><b>/candidateprofile/{accountId}</b></code> <code>Cria um novo perfil de candidato</code></summary>
+
+#### Path Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>accountId</div> <required>required</required></td>
+<td>
+
+int
+<td>
+Account id that the candidate profile will be linked
+</td>
+</td>
+</tr>
+</table>
+
+
+#### Body Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>Body</div> <required>required</required></td>
+<td>
+
+
+```json
+{
+    "name": "",
+    "experiences": "",
+}
+ ```
+
+<td>
+Candidate profile data
+</td>
+</td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+{
+    "id": 0,
+    "account_id": 0,
+    "name": "",
+    "experiences": "",
+    "create_time": "",
+    "update_time": ""
+}
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>UPDATE</code> <code><b>/candidateprofile</b></code> <code>Atualiza um perfil de candidato</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>id</div> <required>required</required></td>
+<td>
+
+int
+<td>
+CandidateProfile id to update
+</td>
+</td>
+</tr>
+</table>
+
+
+#### Body Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>body</div> <required>required</required></td>
+<td>
+
+
+```json
+{
+    "name": "",
+    "experiences":""
+}
+ ```
+
+<td>
+Candidate profile data to update. It's not necessary to send all the fields in body, just the fields wanted to be updated.
+</td>
+</td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+{
+    "id": 0,
+    "account_id": 0,
+    "name": "",
+    "experiences": "",
+    "create_time": "",
+    "update_time": ""
+}
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>GET</code> <code><b>/candidateprofile</b></code> <code>Recupera um ou vários perfis de candidato</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>page</div> <required>required</required></td><td>int<td>Page offset</td></td>
+</tr>
+<tr>
+<td> <div>size</div> <required>required</required></td><td>int<td>Limit of items to be selected</td></td>
+</tr>
+<tr>
+<td> <div>id</div> <required>optional</required></td><td>[int]<td>One or multiple candidate profile ids to be listed </td></td>
+<tr>
+<tr>
+<td> <div>accountId</div> <required>optional</required></td><td>[int]<td>One or multiple account ids to filter candidate profiles by account id </td></td>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+[
+    {
+        "id": 0,
+        "account_id": 0,
+        "type": 0,
+        "status": 0,
+        "title": "",
+        "description": "",
+        "create_time": "",
+        "update_time": ""
+    }
+]
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>DELETE</code> <code><b>/candidateprofile</b></code> <code>Remove um ou vários perfis de candidato</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<td> <div>id</div> <required>optional</required></td><td>[int]<td>One or multiple candidate profile ids to be removed </td></td>
+<tr>
+
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+### JobApplications
+
+
+<details>
+
+ <summary><code>POST</code> <code><b>/jobapplication</b></code> <code>Cria uma nova candidatura</code></summary>
+
+
+#### Body Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>Body</div> <required>required</required></td>
+<td>
+
+
+```json
+{
+    "candidateProfileId": 0,
+    "jobOfferId": 0
+}
+ ```
+
+<td>
+Job application data
+</td>
+</td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+{
+    "id": 0,
+    "candidateprofile_id": 0,
+    "joboffer_id": 0,
+    "create_time": "",
+    "update_time": ""
+}
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>UPDATE</code> <code><b>/jobapplication</b></code> <code>Atualiza uma candidatura</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>id</div> <required>required</required></td>
+<td>
+
+int
+<td>
+Job Application id to update
+</td>
+</td>
+</tr>
+</table>
+
+
+#### Body Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>body</div> <required>required</required></td>
+<td>
+
+
+```json
+{
+	"candidateProfileId": 0,
+    "jobOfferId": 0
+}
+ ```
+
+<td>
+Job application data to update. It's not necessary to send all the fields in body, just the fields wanted to be updated.
+</td>
+</td>
+</tr>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+{
+    "id": 0,
+    "candidateprofile_id": 0,
+    "joboffer_id": 0,
+    "create_time": "",
+    "update_time": ""
+}
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>GET</code> <code><b>/jobapplication</b></code> <code>Recupera uma ou várias candidaturas</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<tr>
+<td> <div>page</div> <required>required</required></td><td>int<td>Page offset</td></td>
+</tr>
+<tr>
+<td> <div>size</div> <required>required</required></td><td>int<td>Limit of items to be selected</td></td>
+</tr>
+<tr>
+<td> <div>candidateProfileId</div> <required>optional</required></td><td>[int]<td>One or multiple candidate profile ids to filter job applications by candidate profiles </td></td>
+<tr>
+<tr>
+<td> <div>jobOfferId</div> <required>optional</required></td><td>[int]<td>One or multiple job offer ids to filter job applications by job offers </td></td>
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+
+```json
+[
+    {
+        "id": 0,
+        "candidateprofile_id": 0,
+        "joboffer_id": 0,
+        "create_time": "",
+        "update_time": ""
+    }
+]
+ ```
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
+<details>
+
+ <summary><code>DELETE</code> <code><b>/jobapplication</b></code> <code>Remove uma ou várias candidaturas</code></summary>
+
+#### Query Parameters
+<table>
+<tr>
+<td> Name </td> <td> Data Type </td> <td>Description</td>
+</tr>
+<td> <div>id</div> <required>optional</required></td><td>[int]<td>One or job application ids to be removed </td></td>
+<tr>
+
+</table>
+
+#### Responses
+
+<table>
+<tr>
+<td> Code </td> <td> Description </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+	
+Successful Operation
+</td>
+</tr>
+
+<tr>
+<td> 500 </td>
+<td>
+Internal Server Error
+</td>
+</tr>
+
+</table>
+
+</details>
+
+
