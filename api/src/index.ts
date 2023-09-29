@@ -27,5 +27,7 @@ app.use(AccountOfferRouter)
 app.use(CandidateProfileRouter)
 app.use(ApplicationRouter)
 
+export default app;
+
 
 
