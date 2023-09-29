@@ -49,14 +49,13 @@ router.get('/jobapplication', async (req, res) => {
         id: req.query.id?.toString().split(',').map(Number),
         candidateProfileId:req.query.candidateProfileId?.toString().split(',').map(Number),
         jobOfferId: req.query.jobOfferId?.toString().split(',').map(Number),
-        size: req.query.size !== undefined ?  Number(req.query.size) : 20,
+        size: Number(req.query.size),
         page: Number(req.query.page)
     };
     try{
         const response = await Repository.JobApplication.select(getBody);
         res.status(200).send(response);
     }catch(error){
-        console.log(error)
         res.status(500).send(error);
 
     } 

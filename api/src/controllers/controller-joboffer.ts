@@ -50,14 +50,13 @@ router.get('/joboffer', async (req, res) => {
         accountId: req.query.accountId?.toString().split(',').map(Number),
         type: req.query.type?.toString().split(',').map(Number),
         status: req.query.status?.toString().split(',').map(Number),
-        size: req.query.size !== undefined ?  Number(req.query.size) : 20,
+        size: Number(req.query.size),
         page: Number(req.query.page)
     };
     try{
         const response = await Repository.JobOffer.select(getBody);
         res.status(200).send(response);
     }catch(error){
-        console.log(error)
         res.status(500).send(error);
 
     } 

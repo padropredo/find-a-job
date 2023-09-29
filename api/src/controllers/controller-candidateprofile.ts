@@ -48,14 +48,13 @@ router.get('/candidateprofile', async (req, res) => {
     const getBody = {
         id: req.query.id?.toString().split(',').map(Number),
         accountId: req.query.accountId?.toString().split(',').map(Number),
-        size: req.query.size !== undefined ?  Number(req.query.size) : 20,
+        size: Number(req.query.size),
         page: Number(req.query.page)
     };
     try{
         const response = await Repository.CandidateProfile.select(getBody);
         res.status(200).send(response);
     }catch(error){
-        console.log(error)
         res.status(500).send(error);
 
     } 

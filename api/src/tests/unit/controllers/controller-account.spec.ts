@@ -1,6 +1,6 @@
 import request from 'supertest'
-import app from '../index'
-import { Repository } from '../repository/repository-account';
+import app from '../../../index'
+import { Repository } from '../../../repository/repository-account';
 
 describe('Account', () => {
   afterAll(() => {
@@ -24,11 +24,12 @@ describe('Account', () => {
   }
   describe("GET /account", () => {
 
-    const select = jest.spyOn(Repository.Account, 'select').mockReturnValue(Promise.resolve(sampleAccount));
+    const select = jest.spyOn(Repository.Account, 'select');
 
     const email = "example@email.com"
 
-    it("should send 200 when email in query", async () => {
+    it("should send 200 when select works", async () => {
+      select.mockReturnValue(Promise.resolve(sampleAccount));
       await request(app).get('/account')
         .query({ email })
         .expect("Content-Type", /json/)
@@ -36,21 +37,22 @@ describe('Account', () => {
       expect(select).toHaveBeenCalledWith({ email });
 
     });
-    it("should send 500 when no email in query", async () => {
+    it("should send 500 when select fails", async () => {
+      select.mockImplementation(() => {throw new Error });
       await request(app).get('/account')
-        .expect(500);
-      expect(select).toHaveBeenCalledWith({ email });
+        .expect(500)
 
     });
   });
 
   describe("POST /account", () => {
 
-    const create = jest.spyOn(Repository.Account, 'create').mockReturnValue(Promise.resolve(sampleAccount));
+    const create = jest.spyOn(Repository.Account, 'create');
 
 
 
-    it("should send 200 when body is complete", async () => {
+    it("should send 200 when create", async () => {
+      create.mockReturnValue(Promise.resolve(sampleAccount))
       await request(app).post('/account')
         .send(sampleBody)
         .expect("Content-Type", /json/)
@@ -58,18 +60,32 @@ describe('Account', () => {
       expect(create).toHaveBeenCalledWith(sampleBody);
 
     });
+    it("should send 500 when create fails", async () => {
+      create.mockImplementation(() => {throw new Error });
+      await request(app).post('/account')
+        .expect(500)
+
+    });
   });
 
 
   describe("DELETE /account", () => {
 
-    const remove = jest.spyOn(Repository.Account, 'remove').mockReturnValue(Promise.resolve());
+    const remove = jest.spyOn(Repository.Account, 'remove');
     const id = 1;
-    it("should send 200", async () => {
+    it("should send 200 when remove works", async () => {
+      remove.mockReturnValue(Promise.resolve());
       await request(app).delete('/account')
         .query({ id: id })
         .expect(200);
       expect(remove).toHaveBeenCalledWith({ id: id });
+
+    });
+
+    it("should send 500 when remove fails", async () => {
+      remove.mockImplementation(() => {throw new Error });
+      await request(app).delete('/account')
+        .expect(500)
 
     });
   });
