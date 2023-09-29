@@ -115,6 +115,8 @@ A criação da API RESTful atua como um intermediário que permite a comunicaç�
 
 A API foi desenvolvida utilizando Node.js como plataforma de execução (runtime) e fazendo uso da biblioteca Express.js, tendo como linguagem de programação TypeScript. Para escrever e ler valores no banco de dados foi usado a biblioteca node-postgres.
 
+Foi utilizado a biblioteca jest e supertest para realizar testes unitários nos arquivos do projeto.
+
 Foram desenvolvidos os principais endpoints para criação, edição, exclusão e listagem dos elementos das tabelas, contidas no banco de dados, como apresentado na documentação a seguir.
 
 ### Account
@@ -1161,3 +1163,5 @@ Outra importante melhoria a ser feita é a criação de middlewares na API para 
 Da maneira que essa aplicação foi implementada a informação de sessão da conta que está conectada na interface de usuário, é feita por meio do LocalStorage e seria mais interessante usar outras estratégias mais seguras, como Cookies Seguros ou a biblioteca Redux Persist por exemplo.
 
 Um aprimoramento na própria interface gráfica para deixá-la mais interessante também é bem vinda.
+
+Por fim uma necessária melhoria é adicionar testes unitários para o projeto da interface gráfica, assim como foi feito na api. Além de criar os testes de integração para ambas as partes (interface gráfica e api) e teste do banco de dados para validar seu funcionamento.
