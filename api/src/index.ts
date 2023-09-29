@@ -19,7 +19,7 @@ app.use(cors());
 //Determina a porta onde a API irá escutar
 const port = process.env.API_PORT;
 
-app.listen(port , () => console.log(`Listening on port ${port}`));
+const server = app.listen(port , () => console.log(`Listening on port ${port}`));
 
 //Adiciona as rotas definidas a aplicação
 app.use(JobOfferRouter)
@@ -27,7 +27,7 @@ app.use(AccountOfferRouter)
 app.use(CandidateProfileRouter)
 app.use(ApplicationRouter)
 
-export default app;
+export default server;
 
 
 

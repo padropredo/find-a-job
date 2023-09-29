@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "npm run build && node dist/index.js",
-    "test": "jest",
+    "test": "jest --runInBand",
     "dev": "nodemon src/index.ts"
   },
   "keywords": [],
